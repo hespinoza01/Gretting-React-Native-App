@@ -1,19 +1,36 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, View, Text, TextInput, Button, Alert } from 'react-native';
+import Styles from './Styles';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      
-    </View>
-  );
+class App extends Component{
+  constructor(props){
+    super(props);
+
+    this.state = {
+      name: ''
+    };
+
+    this.textInput = React.createRef();
+
+    this.handleGrettingBtn = this.handleGrettingBtn.bind(this);
+  }
+
+  handleGrettingBtn(e){
+    this.textInput.current.clear();
+    Alert.alert('Saludo', 'Hola');
+  }
+
+  render(){
+    return(
+      <View style={Styles.container}>
+        <View style={Styles.fieldset}>
+          <Text style={Styles.label}>Ingrese su nombre</Text>
+          <TextInput ref={this.textInput} style={Styles.input} editable/>
+          <Button title='Saludar' onPress={this.handleGrettingBtn}/>
+        </View>
+      </View>
+    );
+  }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
