@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, TextInput, Button, Alert } from 'react-native';
+import { View, Text, TextInput, Button, Keyboard } from 'react-native';
 import Styles from './Styles';
 
 class App extends Component{
@@ -7,7 +7,8 @@ class App extends Component{
     super(props);
 
     this.state = {
-      name: ''
+      name: '',
+      gretting: ''
     };
 
     this.textInput = React.createRef();
@@ -15,9 +16,13 @@ class App extends Component{
     this.handleGrettingBtn = this.handleGrettingBtn.bind(this);
   }
 
-  handleGrettingBtn(e){
+  handleGrettingBtn(){
     this.textInput.current.clear();
-    Alert.alert('Saludo', 'Hola');
+    Keyboard.dismiss();
+
+    this.setState({
+      gretting: `Hola ${this.state.name}, ¡Saludos!`
+    });
   }
 
   render(){
@@ -25,9 +30,18 @@ class App extends Component{
       <View style={Styles.container}>
         <View style={Styles.fieldset}>
           <Text style={Styles.label}>Ingrese su nombre</Text>
-          <TextInput ref={this.textInput} style={Styles.input} editable/>
-          <Button title='Saludar' onPress={this.handleGrettingBtn}/>
+          <TextInput
+              ref={this.textInput}
+              style={Styles.input}
+              onChangeText={(text) => this.setState({name: text})}
+              editable/>
+          <Button title='Saludar'
+                  onPress={this.handleGrettingBtn}/>
         </View>
+
+        <Text style={Styles.gretting}>
+            { this.state.gretting }
+        </Text>
       </View>
     );
   }

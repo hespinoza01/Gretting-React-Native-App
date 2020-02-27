@@ -4,7 +4,7 @@ const Style = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         padding: 50,
         width: Dimensions.get('window').width
     },
@@ -29,6 +29,12 @@ const Style = StyleSheet.create({
         marginTop: 16,
         marginBottom: 16
     },
+
+    gretting: {
+        fontSize: 40,
+        textAlign: 'center',
+        marginBottom: 50
+    }
 });
 
 export default Style;
